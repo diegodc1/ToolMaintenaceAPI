@@ -12,7 +12,7 @@ public class Servico {
     private Long Id;
 
 
-    private String Status;
+    private String status;
 
 
     private String inicio;
@@ -46,11 +46,11 @@ public class Servico {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public String getInicio() {

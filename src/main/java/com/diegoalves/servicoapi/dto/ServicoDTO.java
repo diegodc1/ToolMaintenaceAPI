@@ -110,6 +110,10 @@ public class ServicoDTO {
         return equipamento;
     }
 
+    public Long getIdEquipamento() {
+        return equipamento.getId();
+    }
+
     public void setEquipamento(Equipamento equipamento) {
         this.equipamento = equipamento;
     }
