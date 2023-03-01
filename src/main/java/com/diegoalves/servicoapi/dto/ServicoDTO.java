@@ -16,6 +16,9 @@ public class ServicoDTO {
     private Cliente cliente;
     private Equipamento equipamento;
 
+    public ServicoDTO() {
+    }
+
     public ServicoDTO(String status, String inicio, String termino, String detalhes, String notas, Cliente cliente, Equipamento equipamento) {
         this.status = status;
         this.inicio = inicio;
@@ -39,7 +42,7 @@ public class ServicoDTO {
 
     public Servico newServico(){
         Servico servico = new Servico();
-        servico.setStatus(this.status);
+        servico.setStatus("Pendente");
         servico.setInicio(this.inicio);
         servico.setTermino(this.termino);
         servico.setDetalhes(this.detalhes);

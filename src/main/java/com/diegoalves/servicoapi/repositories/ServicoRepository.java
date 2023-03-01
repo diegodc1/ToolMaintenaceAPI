@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 public interface ServicoRepository extends JpaRepository<Servico, Long> {
@@ -19,6 +20,21 @@ public interface ServicoRepository extends JpaRepository<Servico, Long> {
     @Modifying
     @Query("update Servico s set s.status = ?1 where s.id = ?2")
     void updateStatus(String status, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Servico s set s.inicio = ?1 where s.id = ?2")
+    void updateDateStart(String date, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Servico s set s.termino = ?1 where s.id = ?2")
+    void updateDateFinish(String date, Long id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Servico s SET s.status = ?1, s.termino = ?2, s.detalhes = ?3 WHERE s.id = ?4")
+    void finishService(String status, String date, String detalhes, Long id);
 
     @Transactional
     @Modifying

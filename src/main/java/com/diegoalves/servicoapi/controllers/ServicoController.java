@@ -12,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -53,12 +56,49 @@ public class ServicoController {
         return ResponseEntity.status(HttpStatus.OK).body(resultado);
     }
 
+    //Lista todos os serviços pausados
+    @GetMapping("/servicos/pausados")
+    public ResponseEntity<Object> findAllPause(){
+        List<Servico> resultado = servicoRepository.findByStatus("Pausada");
+        if(resultado.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma ordem de serviço pausada foi encontrada!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(resultado);
+    }
+
+    //Lista todos os serviços finalizados
+    @GetMapping("/servicos/finalizados")
+    public ResponseEntity<Object> findAllFinish(){
+        List<Servico> resultado = servicoRepository.findByStatus("Finalizada");
+        if(resultado.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma ordem de serviço finalizada foi encontrada!");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(resultado);
+    }
+
+
+    //Busca um servico especifico pelo id
+    @GetMapping("/servicos/{id}")
+    public ResponseEntity<Object> findById(@PathVariable Long id){
+        Optional<Servico> resultado = servicoRepository.findById(id);
+        if (!resultado.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma ordem de serviço com este ID foi encontrado!");
+        }
+
+        var servico = resultado.get();
+        return ResponseEntity.status(HttpStatus.OK).body(servico);
+    }
+
+
     //Iniciar um ordem de serviço
     @PostMapping("/servicos/iniciar/{id}")
     public ResponseEntity<Object> startService(@PathVariable Long id){
         try {
             if (servicoRepository.findById(id).isPresent()){
                 servicoRepository.updateStatus("Ativo", id);
+                Date dataHoraAtual = new Date();
+                String data = new SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual);
+                servicoRepository.updateDateStart(data, id);
                 return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço iniciada!");
             } else {
                 return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
@@ -68,6 +108,26 @@ public class ServicoController {
         }
     }
 
+    //Finalizar uma ordem de serviço
+    @PostMapping("/servicos/finalizar/{id}")
+    public ResponseEntity<Object> finishService(@PathVariable Long id, @RequestBody ServicoDTO requiscao){
+        try {
+            if (servicoRepository.findById(id).isPresent()){
+                Date dataHoraAtual = new Date();
+                String data = new SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual);
+
+                servicoRepository.finishService("Finalizada", data, requiscao.getDetalhes(), id);
+
+                return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço finalizada!");
+            } else {
+                return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
+            }
+        } catch (DataAccessException ex) {
+            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.toString());
+        }
+    }
+
+
     //Pausar uma ordem de serviço informando o motivo
     @PostMapping("/servicos/pausar/{id}")
     public ResponseEntity<Object> pauseService(@PathVariable Long id, @RequestBody ServicoDTO requisicao){
@@ -76,6 +136,23 @@ public class ServicoController {
                 servicoRepository.updateNote(requisicao.getNotas(), id);
                 servicoRepository.updateStatus("Pausada", id);
                 return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço pausada!");
+            } else {
+                return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
+            }
+        } catch (DataAccessException ex) {
+            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.toString());
+        }
+    }
+
+
+    //Despausar uma ordem de serviço
+    @PostMapping("/servicos/reativar/{id}")
+    public ResponseEntity<Object> reactivateService(@PathVariable Long id){
+        try {
+            if (servicoRepository.findById(id).isPresent()){
+                servicoRepository.updateNote("", id);
+                servicoRepository.updateStatus("Ativo", id);
+                return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço reativada!");
             } else {
                 return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
             }
@@ -101,22 +178,6 @@ public class ServicoController {
     }
 
 
-    //Finalizar uma ordem de serviço
-    @PostMapping("/servicos/finalizar/{id}")
-    public ResponseEntity<Object> finishService(@PathVariable Long id, @RequestBody ServicoDTO requiscao){
-        try {
-            if (servicoRepository.findById(id).isPresent()){
-                servicoRepository.updateStatus("Finalizada", id);
-                return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço finalizada!");
-            } else {
-                return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
-            }
-        } catch (DataAccessException ex) {
-            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.toString());
-        }
-    }
-
-
     //Adiciona um novo serviço
     @PostMapping("/servicos/new")
     public ResponseEntity<Object> newServico(@RequestBody ServicoDTO requisicao){
@@ -125,7 +186,6 @@ public class ServicoController {
         if (!servicoRepository.findByEquipamentoIdAndStatus(requisicao.getIdEquipamento(), "Ativo").isEmpty() ){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Este equipamento já está em uma ordem de serviço ativa ou pendente");
         }
-
         servicoRepository.save(servico);
         return ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço adicionada com sucesso!");
     }
