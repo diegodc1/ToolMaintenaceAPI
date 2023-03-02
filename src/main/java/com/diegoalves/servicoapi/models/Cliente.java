@@ -1,6 +1,6 @@
 package com.diegoalves.servicoapi.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Clientes")
@@ -26,6 +26,7 @@ public class Cliente {
     }
 
     public Cliente(Long id, String nome, String endereco, String telefone, String email) {
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;

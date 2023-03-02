@@ -39,30 +39,30 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cliente com este ID foi encontrado!");
         }
         var cliente = resultado.get();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(cliente);
+        return ResponseEntity.status(HttpStatus.OK).body(cliente);
     }
 
     //Busca por um clinte pelo email
     @GetMapping("/clientes/buscaemail/{email}")
-    public ResponseEntity<Object> findById(@PathVariable String email){
+    public ResponseEntity<Object> findByEmail(@PathVariable String email){
         List<Cliente> resultado = clienteRepository.findByEmail(email);
 
         if (resultado.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cliente com este EMAIL foi encontrado!");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultado);
+        return ResponseEntity.status(HttpStatus.OK).body(resultado);
     }
 
 
-    //Busca por um cliente pelo nome
+//    Busca por um cliente pelo nome
     @GetMapping("/clientes/buscanome/{nome}")
     public ResponseEntity<Object> findByName(@PathVariable @Validated String nome){
-        List<Cliente> resultado = clienteRepository.findByName(nome);
+        List<Cliente> resultado = clienteRepository.findByNome(nome);
 
         if (resultado.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cliente com este EMAIL foi encontrado!");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resultado);
+        return ResponseEntity.status(HttpStatus.OK).body(resultado);
     }
 
     //Cadastra um novo cliente
@@ -70,6 +70,6 @@ public class ClienteController {
     public ResponseEntity<Object> newCliente(@RequestBody ClienteDTO requisicao){
         Cliente cliente = requisicao.newCliente();
         clienteRepository.save(cliente);
-        return  ResponseEntity.status(HttpStatus.OK).body("Cliente cadastro com sucesso!");
+        return  ResponseEntity.status(HttpStatus.CREATED).body("Cliente cadastro com sucesso!");
     }
 }
