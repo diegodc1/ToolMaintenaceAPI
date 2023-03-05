@@ -19,7 +19,8 @@ public class ServicoDTO {
     public ServicoDTO() {
     }
 
-    public ServicoDTO(String status, String inicio, String termino, String detalhes, String notas, Cliente cliente, Equipamento equipamento) {
+    public ServicoDTO(Long id, String status, String inicio, String termino, String detalhes, String notas, Cliente cliente, Equipamento equipamento) {
+        this.id = id;
         this.status = status;
         this.inicio = inicio;
         this.termino = termino;

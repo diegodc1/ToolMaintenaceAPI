@@ -59,7 +59,7 @@ public class ServicoController {
     //Lista todos os serviços pausados
     @GetMapping("/servicos/pausados")
     public ResponseEntity<Object> findAllPause(){
-        List<Servico> resultado = servicoRepository.findByStatus("Pausada");
+        List<Servico> resultado = servicoRepository.findByStatus("Pausado");
         if(resultado.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma ordem de serviço pausada foi encontrada!");
         }
@@ -69,7 +69,7 @@ public class ServicoController {
     //Lista todos os serviços finalizados
     @GetMapping("/servicos/finalizados")
     public ResponseEntity<Object> findAllFinish(){
-        List<Servico> resultado = servicoRepository.findByStatus("Finalizada");
+        List<Servico> resultado = servicoRepository.findByStatus("Finalizado");
         if(resultado.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma ordem de serviço finalizada foi encontrada!");
         }
@@ -116,7 +116,7 @@ public class ServicoController {
                 Date dataHoraAtual = new Date();
                 String data = new SimpleDateFormat("dd/MM/yyyy").format(dataHoraAtual);
 
-                servicoRepository.finishService("Finalizada", data, requiscao.getDetalhes(), id);
+                servicoRepository.finishService("Finalizado", data, requiscao.getDetalhes(), id);
 
                 return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço finalizada!");
             } else {
@@ -134,7 +134,7 @@ public class ServicoController {
         try {
             if (servicoRepository.findById(id).isPresent()){
                 servicoRepository.updateNote(requisicao.getNotas(), id);
-                servicoRepository.updateStatus("Pausada", id);
+                servicoRepository.updateStatus("Pausado", id);
                 return  ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço pausada!");
             } else {
                 return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ordem de serviço não encontrada! Confira se o id está correto!");
@@ -187,7 +187,7 @@ public class ServicoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Este equipamento já está em uma ordem de serviço ativa ou pendente");
         }
         servicoRepository.save(servico);
-        return ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço adicionada com sucesso!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Ordem de serviço adicionada com sucesso!");
     }
 
 

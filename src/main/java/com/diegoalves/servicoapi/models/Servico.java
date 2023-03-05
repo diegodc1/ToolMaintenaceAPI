@@ -37,6 +37,17 @@ public class Servico {
     public Servico() {
     }
 
+    public Servico(Long id, String status, String inicio, String termino, String detalhes, String notas, Cliente cliente, Equipamento equipamento) {
+        Id = id;
+        this.status = status;
+        this.inicio = inicio;
+        this.termino = termino;
+        this.detalhes = detalhes;
+        this.notas = notas;
+        this.cliente = cliente;
+        this.equipamento = equipamento;
+    }
+
     public Long getId() {
         return Id;
     }

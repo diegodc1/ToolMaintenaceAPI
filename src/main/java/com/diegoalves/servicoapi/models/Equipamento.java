@@ -22,6 +22,13 @@ public class Equipamento {
     public Equipamento() {
     }
 
+    public Equipamento(Long id, String tipo, String marca, String problema) {
+        this.id = id;
+        this.tipo = tipo;
+        this.marca = marca;
+        this.problema = problema;
+    }
+
     public Long getId() {
         return id;
     }

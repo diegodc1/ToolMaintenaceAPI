@@ -35,7 +35,7 @@ public class EquipamentoController {
     public ResponseEntity<Object> newEquipamento(@RequestBody EquipamentoDTO requisicao){
         Equipamento equipamento = requisicao.newEquipamento();
         equipamentoRepository.save(equipamento);
-        return ResponseEntity.status(HttpStatus.OK).body("Equipamento cadastro com sucesso!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("Equipamento cadastro com sucesso!");
     }
 
     //Busca por um equipamento pelo ID
