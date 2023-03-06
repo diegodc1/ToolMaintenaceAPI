@@ -9,7 +9,7 @@
 O objetivo desta API é auxiliar no controle de ordens de serviços de manutenção de equipamentos. Com ela é possível realizar cadastro e gerenciamento de clientes, equipamentos e ordens de serviços. 
 Para o desenvolvimento desta API foi utilizado Java, Spring Boot, SpringMVC, JPA e Hibernate. Para o armazenamento de dados foi utilizado o H2 database.
 
-## 🧪 Tecnologias
+## ⚙️ Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
  
@@ -25,15 +25,25 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   </tr>
   
    <tr>
-    <td>17</td>
+    <td>19</td>
     <td>3.0.2</td>
   </tr>
 </table>
 
 
 ## 🏁 Como Executar
+Execute a API com o comando Maven:
+```bash
+  ./mvnw spring-boot:run 
+```
 
-## 📍 Endpoints
+## 🧪 Testes
+Execute os teste atráves do comando:
+```bash
+   ./mvnw test
+```
+
+## 🎯 Endpoints
 
 <details>
 	<summary>Clientes</summary>
@@ -53,6 +63,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
      "telefone": "41999999999"  <String>
   }
   ```
+	
+  ***
   
   #### 🟩 Listar todos os clientes cadastrados
   
@@ -592,3 +604,16 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 ## 📑 Licença
 Licenciado sob os termos da licença MIT. Veja [LICENSE](https://github.com/diegodc1/ToolMaintenaceAPI/blob/main/LICENSE) para mais informações.
 	
+	
+## 👨‍💻 Autor
+✔️ Diego Alves
+	
+[![gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:diegoalvesdc12@gmail.com "diegoalvesdc12@gmail.com")
+[![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/diegodc1 "diegodc1")
+[![linkedin](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/diego-alves-5198671bb/ "Diego Alves")
+	
+		
+	
+	
+	
+		
