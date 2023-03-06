@@ -207,9 +207,10 @@ public class ServicoController {
         servico.setNotas(requisicao.getNotas());
         servico.setCliente(requisicao.getCliente());
         servico.setEquipamento(requisicao.getEquipamento());
+        servicoRepository.save(servico);
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(servicoRepository.save(servico));
+        return ResponseEntity.status(HttpStatus.OK).body("Ordem de serviço atualizada com sucesso!");
     }
 }
 
