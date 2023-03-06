@@ -4,12 +4,25 @@
  
  ![lastcommit](https://img.shields.io/github/last-commit/diegodc1/ToolMaintenaceAPI?style=flat-square)
  ![license](https://img.shields.io/github/license/diegodc1/ToolMaintenaceAPI?style=flat-square)
+ ![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=Status&message=Em%20Desenvolvimento&color=GREEN&style=flat-square)
  
- ## 💻 Sobre o Projeto
+ <p align="center">
+	 <a href="#sobre">Sobre o Projeto</a> •
+	 <a href="#tecnologias">Tecnologias</a> • 
+	 <a href="#executar">Como Executar</a> • 
+	 <a href="#testes">Testes</a> • 
+	 <a href="#endpoints">Endpoints</a> • 
+	 <a href="#licenca">Licença</a> •
+	 <a href="#autor">Autor</a>
+</p>
+
+
+ 
+ ## 💻 <span id="sobre">Sobre o Projeto</span>
 O objetivo desta API é auxiliar no controle de ordens de serviços de manutenção de equipamentos. Com ela é possível realizar cadastro e gerenciamento de clientes, equipamentos e ordens de serviços. 
 Para o desenvolvimento desta API foi utilizado Java, Spring Boot, SpringMVC, JPA e Hibernate. Para o armazenamento de dados foi utilizado o H2 database.
 
-## ⚙️ Tecnologias
+## ⚙️ <span id="tecnologias">Tecnologias<span>
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
  
@@ -31,19 +44,19 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 </table>
 
 
-## 🏁 Como Executar
+## 🏁 <span id="executar">Como Executar</span>
 Execute a API com o comando Maven:
 ```bash
   ./mvnw spring-boot:run 
 ```
 
-## 🧪 Testes
+## 🧪 <span id="testes">Testes</span>
 Execute os teste atráves do comando:
 ```bash
    ./mvnw test
 ```
 
-## 🎯 Endpoints
+## 🎯 <span id="endpoints">Endpoints</span>
 
 <details>
 	<summary>Clientes</summary>
@@ -601,11 +614,11 @@ Execute os teste atráves do comando:
   ***
 </details>
   
-## 📑 Licença
+## 📑 <span id="licenca">Licença</span>
 Licenciado sob os termos da licença MIT. Veja [LICENSE](https://github.com/diegodc1/ToolMaintenaceAPI/blob/main/LICENSE) para mais informações.
 	
 	
-## 👨‍💻 Autor
+## 👨‍💻 <span id="autor">Autor</span>
 ✔️ Diego Alves
 	
 [![gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:diegoalvesdc12@gmail.com "diegoalvesdc12@gmail.com")
