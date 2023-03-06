@@ -30,6 +30,9 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
   </tr>
 </table>
 
+
+## 🏁 Como Executar
+
 ## 📍 Endpoints
 
 <details>
