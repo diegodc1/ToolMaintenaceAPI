@@ -49,6 +49,7 @@ Execute a API com o comando Maven:
 ```bash
   ./mvnw spring-boot:run 
 ```
+> No start da aplicação, alguns dados são carregados no banco de dados para fins de exemplo.
 
 ## 🧪 <span id="testes">Testes</span>
 Execute os teste atráves do comando:
